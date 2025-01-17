@@ -319,8 +319,8 @@ def createOrUpdate():
         createInstance(item)
 
 def main(argv):
-    parser = argparse.ArgumentParser(description='Package for CRP.')
-    parser.add_argument('command', nargs='?', default='package', choices=['package', 'projects', 'topics', 'instances', 'branches'], help='The command type (list or package)')
+    parser = argparse.ArgumentParser(description='Pack for CRP.')
+    parser.add_argument('command', nargs='?', default='pack', choices=['pack', 'test', 'projects', 'topics', 'instances', 'branches'], help='The command type (list or pack)')
 
     parser.add_argument('--topic', type=str, default=None, help='The topic name parameter')
     parser.add_argument('--name', type=str, default=None, help='The project name parameter')
@@ -359,6 +359,10 @@ def main(argv):
             instances = listCreatedInstances(topic.id)
             for instance in instances:
                 print(topic.name, instance.ProjectName, instance.Branch, instance.Tag, instance.BuildState)
+    if (args.command == 'test'):
+        instances = listInstances()
+        for item in instances:
+            print("create", item.TopicName, item.ProjectName, item.Branch, item.Changelog)
     if (args.command == 'branches'):
         topics = listTopics()
         if len(topics) == 0:
@@ -372,7 +376,7 @@ def main(argv):
                 branchs = listBranchs(project.id, project.url, "")
                 for branch in branchs:
                     print(topic.name, project.name, branch.name, branch.changelog)
-    if (args.command == 'package'):
+    if (args.command == 'pack'):
         createOrUpdate()
 
 if(__name__=="__main__"):

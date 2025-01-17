@@ -50,4 +50,9 @@ crp instances --topic DDE-V25-20250116
 # 查询指定测试主题下的指定包有哪些分支
 crp branches --topic DDE-V25-20250116 --name deepin-desktop-theme-v25
 
+# 测试打包
+crp test --topic DDE-V25-20250116 --name deepin-desktop-theme-v25
+
+# 批量打包，e.g: dtk打包
+cat /usr/share/tools/dtk.packages | strings| xargs -I {} crp --topic DDE-V25-20250116 --name {} --branch upstream/master
 ```

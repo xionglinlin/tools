@@ -14,11 +14,11 @@ class ArgsInfo:
     branchId = 55 # snipe分支
     archs = "amd64;arm64;loong64"
     topicType = "test"
-    userName = "xxxx" # crp用户名（过滤topic）
     userId = "utxxxx"     # crp用户id（登陆获取token）
     #（登陆crp后， Post：https://crp.uniontech.com/api/login 的Body），其中token字段
     password ="xxxx"
 
+    userName = "xxxx" # crp用户名（过滤topic）
     token = "xxxx" 
 
 argsInfo = ArgsInfo()
@@ -80,6 +80,23 @@ def fetchToken():
     result = response.json()
     for key, value in result.items():
         if (key == "Token"):
+            return value
+    return ""
+
+def fetchUser():
+    url = "https://crp.uniontech.com/api/user"
+    headers = {
+        "Authorization": "Bearer " + argsInfo.token
+    }
+
+    response = requests.get(url, headers=headers)
+    if response.status_code != 200:
+        print("Error:", response.status_code, response.text)
+        return []
+
+    result = response.json()
+    for key, value in result.items():
+        if (key == "Name"):
             return value
     return ""
 
@@ -341,6 +358,8 @@ def main(argv):
     
     token = fetchToken()
     argsInfo.token = token
+    userName = fetchUser()
+    argsInfo.userName = userName
     
     if (args.command == 'projects'):
         projects = listPojects()

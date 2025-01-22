@@ -5,7 +5,6 @@
 #### 1. 在`package-crp.py`填写必要信息
 
 ``` python
-userName = "xxxx" # crp用户名（过滤topic）
 userId = "utxxxx" # crp用户id（登录id）
 password = "xxxx" # 密码
 ```

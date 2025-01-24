@@ -53,5 +53,5 @@ crp branches --topic DDE-V25-20250116 --name deepin-desktop-theme-v25
 crp test --topic DDE-V25-20250116 --name deepin-desktop-theme-v25
 
 # 批量打包，e.g: dtk打包
-cat /usr/share/tools/dtk.packages | strings| xargs -I {} crp --topic DDE-V25-20250116 --name {} --branch upstream/master
+cat /usr/share/tools/dtk-v25.packages | strings| xargs -I {} crp --topic DDE-V25-20250116 --name {} --branch upstream/master
 ```

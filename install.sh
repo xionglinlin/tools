@@ -18,7 +18,7 @@ sudo cp ./crp /usr/bin/crp
 
 sudo mkdir -p /usr/share/tools/
 sudo install ./package-crp.py /usr/share/tools/
-sudo install ./dtk.packages /usr/share/tools/
+sudo install ./dtk-v25.packages /usr/share/tools/
 
 echo "##################### 安装完成 #####################"
 echo ""

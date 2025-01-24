@@ -56,7 +56,12 @@ def initTagPR():
 
 def createTagPR():
     a = subprocess.call("git push github dev-changelog -f", shell=True)
-    a = subprocess.call(["gh", "pr", "create", "--title", "chore: bump version to " + argsInfo.projectTag,  "--body", "update changelog to " + argsInfo.projectTag], shell=False)
+
+    args = ["gh", "pr", "create", "--title", "chore: bump version to " + argsInfo.projectTag,  "--body", "update changelog to " + argsInfo.projectTag]
+    if len(argsInfo.projectReviewers) > 0:
+        reviewers = [item for value in argsInfo.projectReviewers for item in ['--reviewer', value]]
+        args.extend(reviewers)
+    a = subprocess.call(args, shell=False)
 
 def mergePR():
     a = subprocess.call(["gh", "pr", "merge", "-r", "dev-changelog"], shell=False)
@@ -85,6 +90,7 @@ def main(argv):
     parser.add_argument('--name', type=str, default=None, help='The project name')
     parser.add_argument('--branch', type=str, default=None, help='The project branch')
     parser.add_argument('--tag', type=str, default=None, help='The project tag')
+    parser.add_argument('--reviewer', type=str, default=[], nargs='+', help='The project reviewers')
 
     args = parser.parse_args()
 
@@ -98,6 +104,9 @@ def main(argv):
         argsInfo.projectRootDir = args.dir
     if (args.org is not None):
         argsInfo.projectOrg = args.org
+    reviewers = args.reviewer
+    if len(reviewers) > 0:
+        argsInfo.projectReviewers = reviewers
 
     createOrUpdateRepo()
     if (args.command == 'merge'):

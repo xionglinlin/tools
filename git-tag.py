@@ -12,6 +12,7 @@ class ArgsInfo:
     githubID = "xxxx"     # github 用户id
     debEmail = "xxxx"
     projectOrg = "linuxdeepin"
+    projectReviewers = []
 
     projectRootDir = "~/.cache/git-tag-dir" # 打tag项目根目录
 
@@ -47,7 +48,7 @@ def initTagPR():
 
     print("Changelog Info:", commitInfo)
 
-    dchProcess = subprocess.Popen(["xargs", "-I", "{}", "dch", "-v", argsInfo.projectTag, "{}"], shell=False, stdin=subprocess.PIPE, text=True)
+    dchProcess = subprocess.Popen(["xargs", "-0", "-I", "{}", "dch", "-v", argsInfo.projectTag, "{}"], shell=False, stdin=subprocess.PIPE, text=True)
     a = dchProcess.communicate(input=commitInfo)
     # a = subprocess.check_output(["xargs", "-I", "{}", "dch", "-v", argsInfo.projectTag, "{}"], shell=False)
     a = subprocess.call("dch -r ''", shell=True)
@@ -64,7 +65,7 @@ def createTagPR():
     a = subprocess.call(args, shell=False)
 
 def mergePR():
-    a = subprocess.call(["gh", "pr", "merge", "-r", "dev-changelog"], shell=False)
+    a = subprocess.call(["gh", "pr", "merge", "-r", argsInfo.githubID + ":" + "dev-changelog"], shell=False)
 
 def createOrUpdateRepo():
     dir = os.path.expanduser(argsInfo.projectRootDir)

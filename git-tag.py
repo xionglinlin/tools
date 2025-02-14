@@ -19,7 +19,7 @@ class ArgsInfo:
 argsInfo = ArgsInfo()
 
 def createRepo():
-    a = subprocess.call(["git", "clone", "git@github.com:" + argsInfo.projectOrg + "/" + argsInfo.projectName + ".git"], shell=False)
+    a = subprocess.call(["git", "clone", "https://github.com/" + argsInfo.projectOrg + "/" + argsInfo.projectName + ".git"], shell=False)
 
 def initRepo():
     a = subprocess.call("git remote add github git@github.com:" + argsInfo.githubID + "/" + argsInfo.projectName + ".git", shell=True)
@@ -92,6 +92,9 @@ def main(argv):
     parser.add_argument('--branch', type=str, default=None, help='The project branch')
     parser.add_argument('--tag', type=str, default=None, help='The project tag')
     parser.add_argument('--reviewer', type=str, default=[], nargs='+', help='The project reviewers')
+
+    if "DEBEMAIL" not in os.environ:
+        os.environ["DEBEMAIL"] = argsInfo.debEmail
 
     args = parser.parse_args()
 

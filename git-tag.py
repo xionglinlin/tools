@@ -48,7 +48,7 @@ def initTagPR():
 
     print("Changelog Info:", commitInfo)
 
-    dchProcess = subprocess.Popen(["xargs", "-0", "-I", "{}", "dch", "-v", argsInfo.projectTag, "{}"], shell=False, stdin=subprocess.PIPE, text=True)
+    dchProcess = subprocess.Popen(["xargs", "-d", "\n", "-I", "{}", "dch", "-v", argsInfo.projectTag, "{}"], shell=False, stdin=subprocess.PIPE, text=True)
     a = dchProcess.communicate(input=commitInfo)
     # a = subprocess.check_output(["xargs", "-I", "{}", "dch", "-v", argsInfo.projectTag, "{}"], shell=False)
     a = subprocess.call("dch -r ''", shell=True)

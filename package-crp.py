@@ -11,7 +11,7 @@ class ArgsInfo:
     projectBranch = "upstream/master" # 项目分支
     projectTag = "5.0.0" # 自定义tag
     projectUpdateMode = True # 根据changelog自动更新版本号
-    branchId = 55 # snipe分支
+    branchId = 119 # snipe分支
     archs = "amd64;arm64;loong64;sw64;mips64el"
     topicType = "test"
     userId = "utxxxx"     # crp用户id（登陆获取token）

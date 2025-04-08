@@ -3,6 +3,7 @@ import argparse
 import requests
 import json
 import re
+import os
 
 # 全局参数
 class ArgsInfo:
@@ -399,4 +400,7 @@ def main(argv):
         createOrUpdate()
 
 if(__name__=="__main__"):
+    os.environ.pop("https_proxy", None)
+    os.environ.pop("http_proxy", None)
+    os.environ.pop("all_proxy", None)
     main(sys.argv)

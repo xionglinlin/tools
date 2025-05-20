@@ -15,9 +15,9 @@ class ArgsInfo:
     branchId = 119 # snipe分支
     archs = "amd64;arm64;loong64;sw64;mips64el"
     topicType = "test"
-    userId = "utxxxx"     # crp用户id（登陆获取token）
+    userId = "ut001383"     # crp用户id（登陆获取token）
     #（登陆crp后， Post：https://crp.uniontech.com/api/login 的Body），其中token字段
-    password ="xxxx"
+    password ="HbUTyKnhl7hPqtRRpnmRAHjguHwyhOu6mXLwvO1mQmq1qy2WWtFsX9HudC0yjMAtBGzBBKZSxlZFfCEzgD8POG48wKpW99s+bYBe3to2VWnti5PUKJkkQ8dsOCh17Rl/Y+hsP7YUFDlfOui9cLEDK43MlMIHfjgamhmWyHz799I="
 
     userName = "xxxx" # crp用户名（过滤topic）
     token = "xxxx" 
